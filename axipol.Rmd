@@ -1,0 +1,61 @@
+---
+title: "Axipol"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+axi <- read_csv2("https://www.data.gouv.fr/fr/datasets/r/e22ba475-45a3-46ac-a0f7-9ca9ed1e283a", col_types = cols(
+  Num_Acc = col_double(),
+  jour = col_double(),
+  mois = col_double(),
+  an = col_double(),
+  hrmn = col_time(format = ""),
+  lum = col_double(),
+  dep = col_character(),
+  com = col_character(),
+  agg = col_double(),
+  int = col_double(),
+  atm = col_double(),
+  col = col_double(),
+  adr = col_character(),
+  lat = col_double(),
+  long = col_double()
+)) 
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+axi %>%
+  filter(dep=="987") %>%
+  ggplot(aes(x=hrmn)) + geom_density(binwidth = 3600, satat = stat_density())
+axi %>%
+  filter(str_starts(dep,"98")) %>%
+  ggplot(aes(x=hrmn)) + geom_density(binwidth = 3600)
+axi %>%
+  ggplot(aes(x=hrmn)) + geom_density(binwidth = 3600)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
